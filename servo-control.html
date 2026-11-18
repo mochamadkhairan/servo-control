@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP32 Servo Controller</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 4px 15px #0002;
+    }
+
+    h2 {
+      color: #2563eb;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin: 25px 0;
+    }
+
+    .angle {
+      font-size: 40px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h2>ESP32 Servo Controller</h2>
+
+    <p>Atur sudut servo menggunakan slider</p>
+
+    <div class="angle">
+      <span id="angleValue">90</span>°
+    </div>
+
+    <form
+      action="https://api.thingspeak.com/update"
+      method="GET"
+      target="resultFrame"
+    >
+
+      <input
+        type="hidden"
+        name="api_key"
+        value="MASUKKAN_WRITE_API_KEY"
+      >
+
+      <input
+        type="range"
+        name="field2"
+        min="0"
+        max="180"
+        value="90"
+        oninput="document.getElementById('angleValue').textContent=this.value"
+      >
+
+      <br>
+
+      <button type="submit">
+        Kirim Sudut Servo
+      </button>
+
+    </form>
+
+    <p>Kontrol Servo melalui ThingSpeak</p>
+
+    <iframe
+      name="resultFrame"
+      style="display:none"
+    ></iframe>
+
+  </div>
+
+</body>
+</html>
